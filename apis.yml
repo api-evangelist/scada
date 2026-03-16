@@ -1,7 +1,9 @@
 name: SCADA
-description: SCADA is a visual computing technology used for creating, processing,
-  or displaying graphical content. It supports applications in design, simulation,
-  entertainment, and data visualization.
+description: SCADA (Supervisory Control and Data Acquisition) is an industrial control
+  system architecture used to monitor and control industrial processes, infrastructure,
+  and facility-based equipment. It is widely used in manufacturing, energy, water treatment,
+  oil and gas, and other critical infrastructure sectors to collect real-time data and
+  control remote equipment.
 url: null
 tags:
 - SCADA
