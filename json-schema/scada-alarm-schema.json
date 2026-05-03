@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/scada/main/json-schema/scada-alarm-schema.json",
+  "title": "ScadaAlarm",
+  "description": "Schema for a SCADA alarm event triggered when a tag value crosses a configured threshold",
+  "type": "object",
+  "properties": {
+    "alarmId": {
+      "type": "string",
+      "description": "Unique identifier for the alarm instance",
+      "example": "ALM-2026-05-02-001"
+    },
+    "alarmName": {
+      "type": "string",
+      "description": "Name or label of the alarm",
+      "example": "Reactor Inlet Pressure High-High"
+    },
+    "tagId": {
+      "type": "string",
+      "description": "Tag ID that triggered the alarm",
+      "example": "PLANT1.AREA2.PV_101"
+    },
+    "alarmType": {
+      "type": "string",
+      "description": "Type of alarm condition",
+      "enum": ["High-High", "High", "Low", "Low-Low", "Rate-of-Change", "Deviation", "Discrete", "Communication"],
+      "example": "High-High"
+    },
+    "priority": {
+      "type": "integer",
+      "description": "Alarm priority level (1=Critical, 2=High, 3=Medium, 4=Low)",
+      "minimum": 1,
+      "maximum": 4,
+      "example": 1
+    },
+    "state": {
+      "type": "string",
+      "description": "Current state of the alarm",
+      "enum": ["Active", "Acknowledged", "Returned-to-Normal", "Shelved"],
+      "example": "Active"
+    },
+    "activeTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the alarm became active",
+      "example": "2026-05-02T14:35:00.000Z"
+    },
+    "acknowledgedTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the alarm was acknowledged by an operator"
+    },
+    "clearedTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the alarm condition cleared"
+    },
+    "triggerValue": {
+      "type": "number",
+      "description": "Tag value at the time the alarm was triggered",
+      "example": 185.3
+    },
+    "limitValue": {
+      "type": "number",
+      "description": "Alarm limit that was exceeded",
+      "example": 180.0
+    },
+    "engineeringUnits": {
+      "type": "string",
+      "description": "Engineering units of the trigger value",
+      "example": "PSI"
+    },
+    "message": {
+      "type": "string",
+      "description": "Human-readable alarm message displayed to operators",
+      "example": "CRITICAL: Reactor inlet pressure PV-101 exceeded 180 PSI limit"
+    },
+    "acknowledgedBy": {
+      "type": "string",
+      "description": "Username of the operator who acknowledged the alarm"
+    },
+    "processArea": {
+      "type": "string",
+      "description": "Process area where the alarm occurred",
+      "example": "Reactor Section"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Operator notes added during alarm acknowledgment"
+    }
+  },
+  "required": ["alarmId", "tagId", "alarmType", "priority", "state", "activeTimestamp", "message"],
+  "additionalProperties": false
+}

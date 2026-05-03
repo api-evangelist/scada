@@ -1,0 +1,105 @@
+{
+  "name": "ScadaTag",
+  "description": "Structure of a SCADA tag data point including real-time value, quality, alarm limits, and device source information",
+  "type": "object",
+  "fields": [
+    {
+      "name": "tagId",
+      "type": "string",
+      "description": "Unique identifier / address for the tag in the SCADA namespace (e.g., PLANT1.AREA2.PV_101)",
+      "required": true,
+      "example": "PLANT1.AREA2.PV_101"
+    },
+    {
+      "name": "tagName",
+      "type": "string",
+      "description": "Human-readable descriptor for the tag",
+      "required": false,
+      "example": "Reactor Inlet Pressure"
+    },
+    {
+      "name": "tagPath",
+      "type": "string",
+      "description": "Hierarchical path in the SCADA tag browser (folder/subfolder/tag)",
+      "required": false,
+      "example": "Plant/Area2/Reactor/PV_101"
+    },
+    {
+      "name": "value",
+      "type": "varies",
+      "description": "Current real-time value - type depends on dataType field (Float, Integer, Boolean, String)",
+      "required": true,
+      "example": 14.7
+    },
+    {
+      "name": "dataType",
+      "type": "string",
+      "description": "OPC-UA data type: Float, Double, Integer, Boolean, String, DateTime",
+      "required": true,
+      "example": "Float"
+    },
+    {
+      "name": "timestamp",
+      "type": "datetime",
+      "description": "ISO 8601 UTC timestamp of the most recent reading",
+      "required": true,
+      "example": "2026-05-02T14:30:00.000Z"
+    },
+    {
+      "name": "quality",
+      "type": "string",
+      "description": "OPC-UA quality status: Good, Uncertain, Bad, Stale",
+      "required": true,
+      "values": [
+        {"value": "Good", "description": "Data is reliable and current"},
+        {"value": "Uncertain", "description": "Data may be stale or from a backup source"},
+        {"value": "Bad", "description": "Data is unreliable - device communication issue"},
+        {"value": "Stale", "description": "Data has not been updated within the configured scan rate"}
+      ]
+    },
+    {
+      "name": "engineeringUnits",
+      "type": "string",
+      "description": "Physical units for the tag value (e.g., PSI, °C, RPM, m3/hr)",
+      "required": false,
+      "example": "PSI"
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "description": "Extended description of what the tag measures",
+      "required": false
+    },
+    {
+      "name": "alarmLimits",
+      "type": "object",
+      "description": "Configured alarm threshold setpoints",
+      "required": false,
+      "nestedFields": [
+        {"name": "highHigh", "type": "number", "description": "Critical high alarm limit"},
+        {"name": "high", "type": "number", "description": "Warning high alarm limit"},
+        {"name": "low", "type": "number", "description": "Warning low alarm limit"},
+        {"name": "lowLow", "type": "number", "description": "Critical low alarm limit"}
+      ]
+    },
+    {
+      "name": "deviceSource",
+      "type": "object",
+      "description": "Information about the field device providing this tag",
+      "required": false,
+      "nestedFields": [
+        {"name": "deviceId", "type": "string", "description": "PLC or RTU identifier"},
+        {"name": "deviceType", "type": "string", "description": "PLC, RTU, DCS, IED, Sensor, Controller"},
+        {"name": "protocol", "type": "string", "description": "Modbus-TCP, OPC-UA, DNP3, EtherNet/IP, PROFINET, BACnet, MQTT"}
+      ]
+    },
+    {
+      "name": "processArea",
+      "type": "string",
+      "description": "Logical plant area or unit (e.g., Reactor Section, Cooling Tower, Compressor Station)",
+      "required": false,
+      "example": "Reactor Section"
+    }
+  ],
+  "source": "json-schema/scada-tag-schema.json"
+}

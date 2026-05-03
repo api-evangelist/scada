@@ -1,0 +1,244 @@
+vocabulary:
+  name: SCADA Domain Vocabulary
+  description: >-
+    Domain vocabulary for Supervisory Control and Data Acquisition (SCADA)
+    systems covering industrial control system architecture, field devices,
+    communication protocols, process data management, and operational technology
+    (OT) security concepts. Used in manufacturing, energy, water treatment,
+    oil and gas, and critical infrastructure sectors.
+  version: "1.0.0"
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+domains:
+  - name: SCADA Architecture
+    description: Core architectural components of a SCADA system
+    terms:
+      - term: SCADA
+        definition: >-
+          Supervisory Control and Data Acquisition — a control system
+          architecture comprising computers, networked data communications,
+          and graphical user interfaces for high-level process supervisory
+          management. SCADA systems are used to monitor and control industrial
+          equipment in industries such as energy, water, manufacturing,
+          and transportation.
+        acronym: SCADA
+
+      - term: HMI
+        definition: >-
+          Human-Machine Interface — the graphical interface through which
+          operators monitor process variables, acknowledge alarms, and issue
+          control commands to the SCADA system. Modern HMIs are web-based
+          and mobile-accessible.
+        acronym: HMI
+        related: [SCADA, Operator Station]
+
+      - term: RTU
+        definition: >-
+          Remote Terminal Unit — a microprocessor-based field device that
+          collects data from sensors and transmits it to the SCADA master
+          station over wide-area network connections. RTUs are used in
+          geographically dispersed infrastructure like pipelines and substations.
+        acronym: RTU
+        related: [PLC, SCADA]
+
+      - term: PLC
+        definition: >-
+          Programmable Logic Controller — an industrial computer used for
+          automation of industrial processes. PLCs execute control logic
+          in real-time and communicate tag data to SCADA systems via
+          protocols such as Modbus, OPC-UA, and EtherNet/IP.
+        acronym: PLC
+        related: [RTU, DCS]
+
+      - term: DCS
+        definition: >-
+          Distributed Control System — a computerized control system used
+          in large-scale industrial processes (e.g., oil refining, chemical
+          plants) where control elements are distributed throughout the plant.
+          DCS differs from SCADA in that it focuses on continuous process
+          control rather than remote monitoring.
+        acronym: DCS
+        related: [PLC, SCADA]
+
+      - term: Historian
+        definition: >-
+          A time-series database dedicated to storing industrial process data
+          from SCADA and DCS systems. Historians support high-frequency data
+          collection (sub-second), compression algorithms, and long-term
+          retention for compliance and analysis. Major vendors include AVEVA
+          PI System, Aspen InfoPlus.21, and GE Proficy Historian.
+        related: [Tag, Time-Series Data]
+
+      - term: SCADA Master Station
+        definition: >-
+          The central server(s) in a SCADA architecture responsible for
+          aggregating data from RTUs and PLCs, running alarm management,
+          storing historian data, and serving the HMI interface to operators.
+
+  - name: Data and Tags
+    description: Concepts related to SCADA process data representation
+    terms:
+      - term: Tag
+        definition: >-
+          A named data point in a SCADA system representing a process variable
+          (sensor reading), setpoint, or control output. Tags have a path
+          (e.g., Plant/Area/Device/Variable), a data type, a current value,
+          a timestamp, and a quality code.
+        related: [Tag Path, Engineering Units, Quality]
+
+      - term: Tag Path
+        definition: >-
+          The hierarchical address of a tag in the SCADA namespace, organized
+          by plant, area, unit, and variable (e.g., Plant1/Reactor/Feed/FlowRate).
+          Tag paths map to ISA-88 and ISA-95 equipment hierarchy standards.
+
+      - term: Engineering Units
+        abbreviation: EU
+        definition: >-
+          The physical measurement unit associated with a tag value (e.g., PSI,
+          °C, RPM, m3/hr, kW). Engineering units are metadata stored with the
+          tag definition and essential for correct data interpretation.
+
+      - term: Quality Code
+        definition: >-
+          An OPC-UA standard status indicator applied to each tag reading,
+          indicating whether the data is reliable: Good, Uncertain, Bad, or Stale.
+          Bad quality typically indicates a device communication failure.
+        values:
+          - Good: Data is reliable and current
+          - Uncertain: Data may be from a backup source or stale
+          - Bad: Communication failure — data is unreliable
+          - Stale: Data not updated within expected scan interval
+
+      - term: Scan Rate
+        definition: >-
+          The frequency at which a SCADA system polls a field device to update
+          a tag's value. Scan rates range from milliseconds (fast control loops)
+          to minutes (slow trend data).
+
+      - term: Deadband
+        definition: >-
+          A filtering setting that prevents a tag value from being reported
+          unless it changes by a minimum amount. Deadbands reduce unnecessary
+          data volume in historians and communications.
+
+  - name: Alarms and Events
+    description: Concepts related to SCADA alarm management
+    terms:
+      - term: Alarm
+        definition: >-
+          A notification generated when a tag value exceeds a configured
+          threshold or an abnormal condition is detected. SCADA alarms
+          require operator acknowledgment and are governed by ISA-18.2.
+        related: [Alarm Priority, ISA-18.2]
+
+      - term: Alarm Priority
+        definition: >-
+          A numeric ranking of an alarm's urgency (typically 1-4):
+          1=Critical/High-High, 2=High, 3=Medium, 4=Low. Priority
+          determines operator response time requirements.
+
+      - term: ISA-18.2
+        definition: >-
+          The ISA (International Society of Automation) standard for Management
+          of Alarm Systems for the Process Industries. Defines best practices
+          for alarm philosophy, rationalization, prioritization, and key
+          performance indicators like alarm flood rate and standing alarms.
+
+      - term: Alarm Flood
+        definition: >-
+          A condition in which more alarms are generated than operators can
+          effectively respond to, often caused by a single equipment failure
+          triggering cascading alarms. ISA-18.2 recommends no more than
+          10 alarms per 10-minute period under abnormal conditions.
+
+      - term: Alarm Rationalization
+        definition: >-
+          The systematic process of reviewing each alarm to confirm it
+          represents a genuine abnormal situation requiring operator response,
+          and setting appropriate setpoints and priorities.
+
+      - term: Dead Time
+        definition: >-
+          The time delay between when an abnormal condition occurs and when
+          the operator acknowledges the alarm. A key performance indicator
+          in alarm management.
+
+  - name: Communication Protocols
+    description: Industrial communication protocols used in SCADA architectures
+    terms:
+      - term: OPC-UA
+        definition: >-
+          OPC Unified Architecture (IEC 62541) — the industrial interoperability
+          standard for secure, reliable data exchange in industrial automation
+          and IoT environments. Provides a platform-independent, service-oriented
+          architecture supporting client/server and pub/sub models.
+        related: [MQTT, Modbus]
+
+      - term: Modbus
+        definition: >-
+          A serial communication protocol originally developed by Modicon (1979)
+          for connecting PLCs. Modbus TCP/IP is the most widely deployed field
+          device protocol in SCADA due to its simplicity and universality.
+
+      - term: DNP3
+        definition: >-
+          Distributed Network Protocol 3 — a robust, secure protocol used
+          primarily in electric utilities and water/wastewater SCADA systems
+          for communication between RTUs, IEDs, and master stations over
+          unreliable WAN links.
+
+      - term: MQTT
+        definition: >-
+          Message Queuing Telemetry Transport (ISO/IEC 20922) — a lightweight
+          pub/sub messaging protocol used in SCADA and IIoT for high-volume,
+          low-bandwidth sensor data streaming. Used with MQTT brokers like
+          Mosquitto, EMQX, and HiveMQ.
+
+      - term: EtherNet/IP
+        definition: >-
+          An industrial Ethernet protocol developed by Rockwell Automation and
+          ODVA for Allen-Bradley PLCs and other industrial devices. Based on
+          the Common Industrial Protocol (CIP) over standard Ethernet.
+
+  - name: Security and Compliance
+    description: OT/ICS security concepts specific to SCADA environments
+    terms:
+      - term: OT Security
+        definition: >-
+          Operational Technology security — practices and technologies for
+          protecting industrial control systems from cyber threats. OT security
+          differs from IT security due to real-time requirements, legacy
+          equipment, and safety criticality.
+        acronym: OT
+        related: [ICS, SCADA]
+
+      - term: ICS
+        definition: >-
+          Industrial Control System — umbrella term for systems used to control
+          industrial processes including SCADA, DCS, PLCs, and RTUs. ICS
+          cybersecurity is governed by standards such as IEC 62443 and NIST
+          SP 800-82.
+        acronym: ICS
+        related: [SCADA, DCS, OT Security]
+
+      - term: Purdue Model
+        definition: >-
+          A reference architecture for industrial network segmentation dividing
+          OT and IT networks into hierarchical zones (Level 0-4). Defines
+          the boundary between field devices (Level 0-1), control systems
+          (Level 2), operations (Level 3), and enterprise systems (Level 4).
+
+      - term: DMZ
+        definition: >-
+          Demilitarized Zone — a network segment separating the OT network
+          from the IT enterprise network. SCADA systems requiring IT integration
+          place data historians and API gateways in the DMZ to avoid direct
+          IT-OT connectivity.
+
+      - term: IEC 62443
+        definition: >-
+          The international standard for cybersecurity of industrial automation
+          and control systems. Defines security levels, zones, conduits, and
+          requirements for ICS vendors and operators.

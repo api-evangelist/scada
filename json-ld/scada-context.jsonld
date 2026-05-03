@@ -1,0 +1,121 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "scada": "https://schema.scada.example.com/ontology#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "ssn": "http://www.w3.org/ns/ssn/",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "iot": "http://iotschema.org/",
+
+    "ScadaSystem": {
+      "@id": "scada:ScadaSystem",
+      "@type": "@id",
+      "comment": "A Supervisory Control and Data Acquisition system"
+    },
+    "PLCDevice": {
+      "@id": "scada:PLCDevice",
+      "@type": "@id",
+      "comment": "A Programmable Logic Controller (PLC) connected to the SCADA network"
+    },
+    "Tag": {
+      "@id": "scada:Tag",
+      "@type": "@id",
+      "comment": "A SCADA data point representing a sensor, setpoint, or control variable"
+    },
+    "Alarm": {
+      "@id": "scada:Alarm",
+      "@type": "@id",
+      "comment": "A SCADA alarm triggered when a tag value crosses a threshold"
+    },
+    "Historian": {
+      "@id": "scada:Historian",
+      "@type": "@id",
+      "comment": "A time-series database that stores historical process data from SCADA"
+    },
+    "ProcessArea": {
+      "@id": "scada:ProcessArea",
+      "@type": "@id",
+      "comment": "A logical grouping of equipment within a SCADA system"
+    },
+    "HMI": {
+      "@id": "scada:HMI",
+      "@type": "@id",
+      "comment": "Human-Machine Interface for operator visualization and control"
+    },
+    "RTU": {
+      "@id": "scada:RTU",
+      "@type": "@id",
+      "comment": "Remote Terminal Unit - a field device that collects data from sensors"
+    },
+    "Sensor": {
+      "@id": "sosa:Sensor",
+      "@type": "@id",
+      "comment": "A physical device measuring an industrial process variable"
+    },
+    "Observation": {
+      "@id": "sosa:Observation",
+      "@type": "@id",
+      "comment": "A measurement reading from a sensor at a specific time"
+    },
+
+    "tagName": {
+      "@id": "scada:tagName",
+      "@type": "xsd:string"
+    },
+    "tagValue": {
+      "@id": "scada:tagValue"
+    },
+    "tagDataType": {
+      "@id": "scada:tagDataType",
+      "@type": "xsd:string"
+    },
+    "timestamp": {
+      "@id": "scada:timestamp",
+      "@type": "xsd:dateTime"
+    },
+    "quality": {
+      "@id": "scada:quality",
+      "@type": "xsd:string"
+    },
+    "alarmState": {
+      "@id": "scada:alarmState",
+      "@type": "xsd:string"
+    },
+    "alarmPriority": {
+      "@id": "scada:alarmPriority",
+      "@type": "xsd:integer"
+    },
+    "alarmMessage": {
+      "@id": "scada:alarmMessage",
+      "@type": "xsd:string"
+    },
+    "engineeringUnits": {
+      "@id": "scada:engineeringUnits",
+      "@type": "xsd:string"
+    },
+    "highHighLimit": {
+      "@id": "scada:highHighLimit",
+      "@type": "xsd:decimal"
+    },
+    "highLimit": {
+      "@id": "scada:highLimit",
+      "@type": "xsd:decimal"
+    },
+    "lowLimit": {
+      "@id": "scada:lowLimit",
+      "@type": "xsd:decimal"
+    },
+    "lowLowLimit": {
+      "@id": "scada:lowLowLimit",
+      "@type": "xsd:decimal"
+    },
+
+    "Device": "schema:Device",
+    "name": "schema:name",
+    "description": "schema:description",
+    "identifier": "schema:identifier",
+    "dateCreated": "schema:dateCreated",
+    "dateModified": "schema:dateModified"
+  }
+}

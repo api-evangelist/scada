@@ -1,0 +1,41 @@
+{
+  "description": "Example SCADA tag data payload representing a pressure sensor reading from an OPC-UA server",
+  "scenario": "Reading real-time tag data from an Ignition SCADA system via its REST API",
+  "request": {
+    "method": "GET",
+    "url": "https://{ignition-host}/system/webdev/api/tags/read",
+    "headers": {
+      "Authorization": "Bearer {{IGNITION_API_TOKEN}}",
+      "Accept": "application/json"
+    },
+    "queryParameters": {
+      "tagPath": "Plant/Area2/Reactor/PV_101"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "tagId": "PLANT1.AREA2.PV_101",
+      "tagName": "Reactor Inlet Pressure",
+      "tagPath": "Plant/Area2/Reactor/PV_101",
+      "value": 142.7,
+      "dataType": "Float",
+      "timestamp": "2026-05-02T14:30:00.000Z",
+      "quality": "Good",
+      "engineeringUnits": "PSI",
+      "description": "Differential pressure transmitter at reactor inlet header - PV-101",
+      "alarmLimits": {
+        "highHigh": 180.0,
+        "high": 165.0,
+        "low": 50.0,
+        "lowLow": 30.0
+      },
+      "deviceSource": {
+        "deviceId": "PLC_REACTOR_001",
+        "deviceType": "PLC",
+        "protocol": "OPC-UA"
+      },
+      "processArea": "Reactor Section"
+    }
+  }
+}

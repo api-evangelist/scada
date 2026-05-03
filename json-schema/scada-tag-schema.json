@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/scada/main/json-schema/scada-tag-schema.json",
+  "title": "ScadaTag",
+  "description": "Schema for a SCADA data tag representing a sensor reading, setpoint, or control variable",
+  "type": "object",
+  "properties": {
+    "tagId": {
+      "type": "string",
+      "description": "Unique identifier for the tag in the SCADA system",
+      "example": "PLANT1.AREA2.PV_101"
+    },
+    "tagName": {
+      "type": "string",
+      "description": "Human-readable name for the tag",
+      "example": "Reactor Inlet Pressure"
+    },
+    "tagPath": {
+      "type": "string",
+      "description": "Hierarchical path to the tag in the SCADA tag browser",
+      "example": "Plant/Area2/Reactor/PV_101"
+    },
+    "value": {
+      "description": "Current value of the tag (type depends on dataType)",
+      "example": 14.7
+    },
+    "dataType": {
+      "type": "string",
+      "description": "Data type of the tag value",
+      "enum": ["Float", "Double", "Integer", "Boolean", "String", "DateTime"],
+      "example": "Float"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the tag reading",
+      "example": "2026-05-02T14:30:00.000Z"
+    },
+    "quality": {
+      "type": "string",
+      "description": "OPC-UA quality code indicating data reliability",
+      "enum": ["Good", "Uncertain", "Bad", "Stale"],
+      "example": "Good"
+    },
+    "engineeringUnits": {
+      "type": "string",
+      "description": "Physical engineering units for the tag value",
+      "example": "PSI"
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of what the tag measures",
+      "example": "Pressure at reactor inlet measured by differential pressure transmitter PV-101"
+    },
+    "alarmLimits": {
+      "type": "object",
+      "description": "Configured alarm threshold limits for the tag",
+      "properties": {
+        "highHigh": {
+          "type": "number",
+          "description": "High-High alarm setpoint (critical)"
+        },
+        "high": {
+          "type": "number",
+          "description": "High alarm setpoint (warning)"
+        },
+        "low": {
+          "type": "number",
+          "description": "Low alarm setpoint (warning)"
+        },
+        "lowLow": {
+          "type": "number",
+          "description": "Low-Low alarm setpoint (critical)"
+        }
+      }
+    },
+    "deviceSource": {
+      "type": "object",
+      "description": "Source field device information",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Identifier of the PLC or RTU providing the tag"
+        },
+        "deviceType": {
+          "type": "string",
+          "description": "Type of source device",
+          "enum": ["PLC", "RTU", "DCS", "IED", "Sensor", "Controller"]
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Communication protocol used to read this tag",
+          "enum": ["Modbus-TCP", "OPC-UA", "DNP3", "EtherNet/IP", "PROFINET", "BACnet", "MQTT"]
+        }
+      }
+    },
+    "processArea": {
+      "type": "string",
+      "description": "Logical process area or plant unit this tag belongs to",
+      "example": "Reactor Section"
+    }
+  },
+  "required": ["tagId", "value", "dataType", "timestamp", "quality"],
+  "additionalProperties": false
+}
