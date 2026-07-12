@@ -120,6 +120,8 @@ apis:
         url: https://techsupport.osisoft.com/Documentation/PI-Web-API/
 
 common:
+  - type: DomainSecurity
+    url: security/scada-domain-security.yml
   - type: Website
     url: https://www.isa.org/
   - type: Standards Body

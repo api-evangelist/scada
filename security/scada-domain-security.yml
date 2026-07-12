@@ -1,0 +1,33 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.isa.org
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Dec 10 23:59:59 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: opcfoundation.org
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct  2 01:15:05 2026 GMT
+  hsts: false
+- host: mqtt.org
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 22 20:15:21 2026 GMT
+  hsts: false
+domains:
+- domain: isa.org
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
+- domain: opcfoundation.org
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none
