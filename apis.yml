@@ -49,6 +49,11 @@ apis:
     tags:
       - IEC 62541
       - Industrial Interoperability
+      - OPC UA
+      - Real-Time Data
+    tags_raw:
+      - IEC 62541
+      - Industrial Interoperability
       - OPC-UA
       - Real-Time Data
     properties:
@@ -67,6 +72,12 @@ apis:
       telemetry streaming.
     humanURL: https://mqtt.org/
     tags:
+      - IoT
+      - MQTT
+      - Messaging
+      - Pub-Sub
+      - Telemetry
+    tags_raw:
       - IoT
       - MQTT
       - Messaging
@@ -124,6 +135,10 @@ apis:
       data assets.
     humanURL: https://techsupport.osisoft.com/Documentation/PI-Web-API/
     tags:
+      - Historian
+      - OSIsoft PI
+      - Time Series
+    tags_raw:
       - Historian
       - OSIsoft PI
       - Time-Series
