@@ -60,7 +60,7 @@ apis:
     tags:
       - IEC 62541
       - Industrial Interoperability
-      - OPC-UA
+      - OPC UA
       - Real-Time Data
     tags_raw:
       - IEC 62541
@@ -86,7 +86,7 @@ apis:
       - IoT
       - MQTT
       - Messaging
-      - Pub/Sub
+      - Pub-Sub
       - Telemetry
     tags_raw:
       - IoT
@@ -148,7 +148,7 @@ apis:
     tags:
       - Historian
       - OSIsoft PI
-      - Time-Series
+      - Time Series
     tags_raw:
       - Historian
       - OSIsoft PI
