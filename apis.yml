@@ -89,7 +89,7 @@ apis:
       - IoT
       - MQTT
       - Messaging
-      - Pub-Sub
+      - Pub/Sub
       - Telemetry
     tags_raw:
       - IoT
